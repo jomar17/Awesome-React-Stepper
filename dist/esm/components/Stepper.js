@@ -43,11 +43,16 @@ var Stepper = function (props) {
         if (!active || active >= children.length) {
             return;
         }
-        progress(active);
         if (isValidNext) {
+            progress(active);
             var newActive = active + 1;
             setActive(newActive);
             onContinue(newActive);
+            console.log('can go next', newActive);
+        }
+        else {
+            // Handle the case where isValidNext is false (e.g., show an error message)
+            console.error('Invalid next step'); // You can replace this with your error handling logic
         }
     };
     var progressClick = function (ind) {
