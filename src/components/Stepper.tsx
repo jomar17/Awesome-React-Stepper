@@ -23,6 +23,7 @@ const Stepper = (props: StepperProps) => {
     progressBarClassName = '',
     contentBoxClassName = '',
     allowClickControl = true,
+    isValidNext = true,
   } = props;
 
   const [active, setActive] = useState<number>(0);
@@ -73,9 +74,11 @@ const Stepper = (props: StepperProps) => {
       return;
     }
     progress(active);
-    const newActive = active + 1;
-    setActive(newActive);
-    onContinue(newActive);
+    if(isValidNext) {
+      const newActive = active + 1;
+      setActive(newActive);
+      onContinue(newActive);
+    }
   };
 
   const progressClick = (ind: number) => {
