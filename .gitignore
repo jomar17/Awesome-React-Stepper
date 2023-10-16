@@ -1,5 +1,5 @@
 # builds
-dist
+# dist
 # Node modules
 node_modules/
 # Ignore files with sensitive environment variables
