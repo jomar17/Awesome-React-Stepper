@@ -83,10 +83,9 @@ const Stepper = (props: StepperProps) => {
       const newActive = active + 1;
       setActive(newActive);
       onContinue(newActive);
-      console.log('can go next', newActive);
     } else {
       // Handle the case where canGoNext is false (e.g., show an error message)
-      console.error('Invalid next step'); // You can replace this with your error handling logic
+      console.error("Can't go next"); // You can replace this with your error handling logic
     }
   };
 
