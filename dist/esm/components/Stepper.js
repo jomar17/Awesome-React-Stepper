@@ -3,6 +3,7 @@ import '../styles/stepper.css';
 var Stepper = function (props) {
     var _a = props.children, children = _a === void 0 ? [] : _a, _b = props.showProgressBar, showProgressBar = _b === void 0 ? true : _b, _c = props.defaultActiveStep, defaultActiveStep = _c === void 0 ? 1 : _c, backBtn = props.backBtn, continueBtn = props.continueBtn, submitBtn = props.submitBtn, _d = props.onContinue, onContinue = _d === void 0 ? function () { } : _d, _e = props.onPrev, onPrev = _e === void 0 ? function () { } : _e, _f = props.onSubmit, onSubmit = _f === void 0 ? function () { } : _f, _g = props.btnPos, btnPos = _g === void 0 ? 'space-between' : _g, _h = props.barWidth, barWidth = _h === void 0 ? '' : _h, _j = props.strokeColor, strokeColor = _j === void 0 ? '#cdd3d8' : _j, _k = props.fillStroke, fillStroke = _k === void 0 ? '#3a4047' : _k, _l = props.stroke, stroke = _l === void 0 ? 2 : _l, _m = props.activeColor, activeColor = _m === void 0 ? '#3A4047' : _m, _o = props.activeProgressBorder, activeProgressBorder = _o === void 0 ? '2px solid #f3f4f5' : _o, _p = props.progressBarClassName, progressBarClassName = _p === void 0 ? '' : _p, _q = props.contentBoxClassName, contentBoxClassName = _q === void 0 ? '' : _q, _r = props.allowClickControl, allowClickControl = _r === void 0 ? true : _r, _s = props.isValidNext, isValidNext = _s === void 0 ? true : _s;
     var _t = useState(0), active = _t[0], setActive = _t[1];
+    var _u = useState(false), canGoNext = _u[0], setCanGoNext = _u[1];
     useEffect(function () {
         if (defaultActiveStep <= children.length &&
             defaultActiveStep > 0) {
@@ -14,6 +15,9 @@ var Stepper = function (props) {
             setActive(1);
         }
     }, []);
+    useEffect(function () {
+        setCanGoNext(isValidNext);
+    }, [isValidNext]);
     useEffect(function () {
         if (children.length > 1 && showProgressBar) {
             //Progress Circle Border & Background Color
@@ -43,7 +47,7 @@ var Stepper = function (props) {
         if (!active || active >= children.length) {
             return;
         }
-        if (isValidNext) {
+        if (canGoNext) {
             progress(active);
             var newActive = active + 1;
             setActive(newActive);
@@ -51,7 +55,7 @@ var Stepper = function (props) {
             console.log('can go next', newActive);
         }
         else {
-            // Handle the case where isValidNext is false (e.g., show an error message)
+            // Handle the case where canGoNext is false (e.g., show an error message)
             console.error('Invalid next step'); // You can replace this with your error handling logic
         }
     };
