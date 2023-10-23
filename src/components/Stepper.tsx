@@ -171,7 +171,7 @@ const Stepper = (props: StepperProps) => {
         >
           {active > 1 ? (
             backBtn ? (
-              <span onClick={previousStep} style={{ marginRight: '20px' }}>
+              <span onClick={previousStep}>
                 {backBtn}
               </span>
             ) : (
