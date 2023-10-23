@@ -52,11 +52,10 @@ var Stepper = function (props) {
             var newActive = active + 1;
             setActive(newActive);
             onContinue(newActive);
-            console.log('can go next', newActive);
         }
         else {
             // Handle the case where canGoNext is false (e.g., show an error message)
-            console.error('Invalid next step'); // You can replace this with your error handling logic
+            console.error("Can't go next"); // You can replace this with your error handling logic
         }
     };
     var progressClick = function (ind) {
@@ -107,7 +106,7 @@ var Stepper = function (props) {
                     justifyContent: btnPos,
                     marginTop: '20px'
                 } },
-                active > 1 ? (backBtn ? (React.createElement("span", { onClick: previousStep, style: { marginRight: '20px' } }, backBtn)) : (React.createElement("button", { className: 'defaultBtn', onClick: previousStep, style: { marginRight: '20px' } }, "Go Back"))) : (React.createElement("span", null)),
+                active > 1 ? (backBtn ? (React.createElement("span", { onClick: previousStep }, backBtn)) : (React.createElement("button", { className: 'defaultBtn', onClick: previousStep, style: { marginRight: '20px' } }, "Go Back"))) : (React.createElement("span", null)),
                 active < children.length ? (continueBtn ? (React.createElement("span", { onClick: function () { return nextStep(); } }, continueBtn)) : (React.createElement("button", { className: 'defaultBtn', onClick: function () { return nextStep(); } }, "Continue"))) : submitBtn ? (React.createElement("span", { onClick: function () { return onSubmit(active); } }, submitBtn)) : (React.createElement("button", { className: 'defaultBtn', onClick: function () { return onSubmit(active); } }, "Submit"))))));
 };
 export default Stepper;
